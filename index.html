@@ -4,41 +4,50 @@
     <script src="//d3js.org/d3.v5.min.js"></script>
 </head>
 <body>
-    <a-scene>
+    <!-- A-SCENE -->
+    <a-scene stats>
+    <!-- SKYBOX -->    
     <a-assets>
         <img id="skyBox" src="https://upload.wikimedia.org/wikipedia/commons/e/e2/Paris_360.jpg">
     </a-assets>
-    <a-box position="-5 0.5 -4" rotation="0 -45 0" width="1" height="4" color="#654321"></a-box>
-    <a-box position="-3.5 2 -5.5" rotation="0 -45 0" width="1" height="4" color="#654321"></a-box>
-    <a-box position="-4.2 3.5 -5" rotation="-90 -45 0" width="1" height="3.2" color="#654321"></a-box>
-    <a-cylinder position="1 0.75 -3" radius="1.0" height="1.5" color="#FFC65D"></a-cylinder> 
-    <a-plane position="0 0 -4" rotation="-90 0 0" width="20" height="20" color="#7BC8A4"></a-plane>
     <a-sky src="#skyBox"></a-sky>
-    <a-cone id="clone-me" position="0 2 -5" height="5" color="#654321"></a-cone>
+    <!-- A-ENTITIES -->
+    <a-plane position="0 0 -4" rotation="-90 0 0" width="20" height="20" color="#6eb493"></a-plane>
+    <!--<a-sphere id="clone-me" radius="0.75" position="0 2 -4" color="#e5e5e5"></a-sphere>-->
     <a-entity position="5.5 0.5 -2" geometry="primitive: tetrahedron; radius: 1.5" material="color: white; opacity: 0.7" rotation="-40 0 45"></a-entity>
-    <a-entity position="-4.5 2.5 -4.7" geometry="primitive: torus; radius: 1; radiusTubular: 0.2; arc: 180" material="color: #654321; side: double" rotation="0 45 0"></a-entity>
     <a-entity clone="clone-me" position="0 3 -5"></a-entity>
-    
-
     </a-scene>
-    <script>
-            //
-            var scene = document.querySelector('a-scene');
-        
-            AFRAME.registerComponent('mycomponent', {
-            schema: { 
-                theData: {type: 'array'}
-            },
-            init: function () {
-                console.log(this.data.yourData);
-            }
-            });
-            const array = [1,2,3,4,5,6,7,8,9,10]
-            const element = document.createElement('a-entity');
-            element.setAttribute('mycomponent', {theData: array});
-            scene.appendChild(element);
-            
-            </script>
-  </body>
     
+    <!-- D3 SCRIPT -->
+    <script>
+        var someArray = [1,2,3,4,5,6,7,8,9,10];
+
+        d3.select('a-scene')
+            .selectAll()
+            .data(someArray)
+            .enter()
+            .append('a-sphere')
+            .attr('radius', function(d) { return d/10; })
+            .attr('position', function(d) { return [Math.random() * 1.5, Math.random() * 2.5, -4].join(' ');})//Math.random + Math.random * 2 + Math.random * -4; })
+            .attr('material:opacity', 0.7)
+            .style('fill', "#e5e5e5");
+
+            //
+            // var scene = document.querySelector('a-scene');
+        
+            // AFRAME.registerComponent('mycomponent', {
+            // schema: { 
+            //     theData: {type: 'array'}
+            // },
+            // init: function () {
+            //     console.log(this.data.yourData);
+            // }
+            // });
+            // const array = [1,2,3,4,5,6,7,8,9,10]
+            // const element = document.createElement('a-entity');
+            // element.setAttribute('mycomponent', {theData: array});
+            // scene.appendChild(element);
+            
+    </script>
+</body>    
 </html>
