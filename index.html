@@ -6,16 +6,17 @@
 <body>
     <!-- A-SCENE -->
     <a-scene stats>
-    <!-- SKYBOX -->    
+    <!-- SKYBOX and MODELS -->    
     <a-assets>
         <img id="skyBox" src="https://upload.wikimedia.org/wikipedia/commons/e/e2/Paris_360.jpg">
+        <a-asset-item id="starBall" src="models/dragonball/scene.gltf"></a-asset-item>
     </a-assets>
     <a-sky src="#skyBox"></a-sky>
     <!-- A-ENTITIES -->
     <a-plane position="0 0 -4" rotation="-90 0 0" width="20" height="20" color="#6eb493"></a-plane>
     <!--<a-sphere id="clone-me" radius="0.75" position="0 2 -4" color="#e5e5e5"></a-sphere>-->
     <a-entity position="5.5 0.5 -2" geometry="primitive: tetrahedron; radius: 1.5" material="color: white; opacity: 0.7" rotation="-40 0 45"></a-entity>
-    <a-entity clone="clone-me" position="0 3 -5"></a-entity>
+    <a-entity id='ball' position="-2 0.5 -5" gltf-model="#starBall"></a-entity>
     </a-scene>
     
     <!-- D3 SCRIPT -->
